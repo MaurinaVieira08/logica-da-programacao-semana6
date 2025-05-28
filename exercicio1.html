@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Alarme!</h1>
+    <button id="lembrete">Começar</button>
+    <p id="mensagem"></p>
+    <h2>contador: <span id="contador"></span></h2>
+    <script>
+        let contador=5
+        document.getElementById('lembrete').addEventListener('click', function(){
+            let intervalo=setInterval(()=>{
+                document.getElementById('contador').textContent=contador
+                contador--;
+                if(contador<0){
+                    clearInterval(intervalo)
+                    document.getElementById('mensagem').textContent="oia, o tempo acabou"}
+            },1000)
+        })
+    </script>
+</body>
+</html>
