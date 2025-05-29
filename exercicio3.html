@@ -5,21 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>meu joguinho</title>
     <link rel="stylesheet" href="exercicio3.css">
-    <script src="exercicio3.js"></script>
 </head>
 <body>
     <h1>Jogo de digitação</h1>
-    <p>Digite o mais rápido possível!</p>
 
+    <p>Digite o mais rápido possível!</p>
     <p id="texto">JavaScript é uma linguagem de programação muito popular.</p>
 
-    <input type="text" id="CampoTexto" placeholder="Digite o texto aqui">
+    <input type="text" id="campoTexto" placeholder="Digite o texto aqui">
 
     <p id="resultado"></p>
+    <p id="tempo">tempo: <span id="contador">0 </span>segundos</p>
 
-    <p>tempo: <span id="contador">0 </span>segundos</p>
+    <button id="reiniciar">Reiniciar jogo</button>
 
-    <button id="reiniciar">Iniciar jogo</button>
+    <script>
+        const textoOriginal=document.getElementById('texto').textContent
+        const campoTexto =document.getElementById('campoTexto')
+        const resultado = document.getElementById('resultado')
+        const contador=document.getElementById('contador')
+        const reiniciarButton= document.getElementById('reiniciar')
+
+        let tempoIniciado=false
+        let tempo=0
+        let intervalId;
+
+
+        function iniciarTempo(){
+            tempoIniciado=true
+            intervalId=setInterval(function(){
+                tempo++;
+                contador.textContent=tempo;
+            },1000)
+        }
+
+        function reiniciarJogo(){
+            clearInterval(intervalId)
+            tempo=0
+            contador.textContent=tempo;
+            resultado.textContent = '';
+            campoTexto.disabled = false;
+            tempoIniciado = false;
+        }
+
+        campoTexto.addEventListener('input', function(){
+            if(!tempoIniciado){
+             iniciarTempo();
+            }
+            
+            if(campoTexto.value=== textoOriginal){
+                clearInterval(intervalId)
+                resultado.textContent= `Parabens,você é o melhor! Fez em ${tempo} segundos`;
+                campoTexto.disabled= true
+            }
+        })
+        reiniciarButton.addEventListener('click',reiniciarJogo)
+    </script>
 
 </body>
 </html>

@@ -1,8 +1,8 @@
-  let textoOriginal=document.getElementById('texto').textContent
-        let campotexto=document.getElementById('campoTexto')
-        let resultado = document.getElementById('resultado')
-        let contador=document.getElementById('contador')
-        let reiniciarButton= document.getElementById('reiniciar')
+        const textoOriginal=document.getElementById('texto').textContent
+        const campoTexto =document.getElementById('campoTexto')
+        const resultado = document.getElementById('resultado')
+        const contador=document.getElementById('contador')
+        const reiniciarButton= document.getElementById('reiniciar')
 
         let tempoIniciado=false
         let tempo=0
@@ -18,11 +18,12 @@
         }
 
         function reiniciarJogo(){
+            clearInterval(intervalId)
             tempo=0
             contador.textContent=tempo;
-            campoTexto.value=''
-            campoTexto.disabled=false;
-            tempoIniciado= false
+            resultado.textContent = '';
+            campoTexto.disabled = false;
+            tempoIniciado = false;
         }
 
         campotexto.addEventListener('input', function(){
@@ -32,8 +33,9 @@
             
             if(campotexto.value=== textoOriginal){
                 clearInterval(intervalId)
-                resultado.textContent= 'parabens,você é o melhor!'
+                resultado.textContent= 'parabens,você é o melhor!';
                 campotexto.disabled= true
             }
         })
         reiniciarButton.addEventListener('click',reiniciarJogo())
+ 
